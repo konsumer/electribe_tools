@@ -28,7 +28,7 @@ export class E2Pattern {
   }
 
   get name () {
-    return decoder.decode(this.pattern.slice(0x110, 0x110 + 0x10))
+    return decoder.decode(this.pattern.slice(0x110, 0x110 + 0x10)).replace(/\u0000/g, '').trim()
   }
 
   set name (s) {
