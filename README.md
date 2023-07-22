@@ -13,3 +13,8 @@ This is baed on code from [electribe2-pattern-editor](https://maxforlive.com/lib
 - First 250 patterns will be added to allpat file in alphanumeric order by filename.
 - Re-order and rename patterns by editing filenames.
 - Filenames must retain 4 character 'nnn_' prefix for patterns to be named correctly.
+
+### TODO
+
+- pattern-editing
+- send to device via sysex (using [Web MIDI API](https://developer.mozilla.org/en-US/docs/Web/API/Web_MIDI_API))

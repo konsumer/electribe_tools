@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { Uint8ArrayReader, Uint8ArrayWriter, ZipReader, ZipWriter } from '@zip.js/zip.js'
-import { IconCircleXFilled } from '@tabler/icons-react'
+import { Uint8ArrayReader, BlobWriter, ZipReader, ZipWriter } from '@zip.js/zip.js'
+import { IconCircleXFilled, IconDownload } from '@tabler/icons-react'
 
 import { E2Pattern } from './e2.js'
 import { download, readAsArrayBuffer } from './utils.js'
@@ -79,16 +79,26 @@ export default function PatternManager () {
       .catch(e => setError(e.message))
   }
 
+  const handleDownloadE2 = () => {
+
+  }
+
+  const handleDownloadZip = () => {
+
+  }
+
   return (
     <div className='p-2 m-auto prose'>
       <div className='mt-4'>
-        <h2>Pattern Manager</h2>
-        <p className=''>This tool will allow you to convert a zip of patterns + global settings to an e2sallpat file, or vice-versa. You can use it to rename/re-order a bunch of patterns, or use the individual patterns in other tools.</p>
+        <h2>Pattern Collection Manager</h2>
+        <p>This tool will allow you to convert a zip of patterns + global settings to an e2sallpat file, or vice-versa. You can use it to rename/re-order a bunch of patterns, or use the individual patterns in other tools. No files are stored on server, or even uploaded.</p>
         <p>Select a zip or e2sallpat file, it will auto-detect the format.</p>
-        <div className='alert alert-success mb-4'>
-          <span>No files are stored on server, or even uploaded.</span>
+        {!!samples.length && (<p>Drag & drop to re-order</p>)}
+        <div className='flex gap-2 justify-between'>
+          <input id='allpat' onChange={handleFileSelect} type='file' className='file-input file-input-bordered file-input-primary w-full max-w-xs' />
+          {!!samples.length && (<button onClick={handleDownloadE2} className='btn btn-secondary'><IconDownload /> Download e2sallpat</button>)}
+          {!!samples.length && (<button onClick={handleDownloadZip} className='btn btn-secondary'><IconDownload /> Download zip</button>)}
         </div>
-        <input onChange={handleFileSelect} type='file' className='file-input file-input-bordered file-input-primary w-full max-w-xs' />
         {error && (
           <div className='alert alert-error mt-4'>
             <IconCircleXFilled />

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
-import { IconTrash, IconPencil } from '@tabler/icons-react'
+import { IconTrash, IconPencil, IconDownload } from '@tabler/icons-react'
 
 // a little function to help us with reordering the result
 const reorder = (list, startIndex, endIndex) => {
@@ -63,6 +63,8 @@ export default function PatternList ({ items, setItems, ...props }) {
     setEdit(false)
     window.modal_edit.close()
   }
+
+  const handleDownload = n => e => {}
 
   const handFieldChange = n => e => setEdit({ ...edit, [n]: e.target.value })
 
@@ -183,6 +185,9 @@ export default function PatternList ({ items, setItems, ...props }) {
                         <div>
                           <a className='tooltip cursor-pointer' data-tip={`Delete ${item.name}`} onClick={handleDelete(index)}>
                             <IconTrash />
+                          </a>
+                          <a className='tooltip cursor-pointer' data-tip={`Download ${item.name}`} onClick={handleDownload(index)}>
+                            <IconDownload />
                           </a>
                           <a className='tooltip cursor-pointer' data-tip={`Edit ${item.name}`} onClick={handleEditShow(index)}>
                             <IconPencil />
