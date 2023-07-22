@@ -71,85 +71,88 @@ export default function PatternList ({ items, setItems, ...props }) {
       <dialog id='modal_edit' className='modal'>
         {edit && (
           <form method='dialog' className='modal-box'>
+            <button className='btn btn-sm btn-circle btn-ghost absolute right-2 top-2'>✕</button>
             <h3 className='font-bold text-lg'>{edit.name}</h3>
-            <div className='py-4'>
-              <div className='form-control w-full max-w-xs'>
-                <label className='label'>
-                  <span className='label-text'>Pattern Name</span>
-                </label>
-                <input type='text' className='input input-bordered w-full max-w-xs' value={edit.name} onChange={handFieldChange('name')} />
-              </div>
-              <div className='form-control w-full max-w-xs'>
-                <label className='label'>
-                  <span className='label-text'>BPM</span>
-                </label>
-                <input type='number' className='input input-bordered w-full max-w-xs' value={edit.bpm} onChange={handFieldChange('bpm')} />
-              </div>
-              <div className='form-control w-full max-w-xs'>
-                <label className='label'>
-                  <span className='label-text'>Swing</span>
-                </label>
-                <input type='number' className='input input-bordered w-full max-w-xs' value={edit.swing} onChange={handFieldChange('swing')} />
-              </div>
-              <div className='form-control w-full max-w-xs'>
-                <label className='label'>
-                  <span className='label-text'>Length</span>
-                </label>
-                <input type='number' className='input input-bordered w-full max-w-xs' value={edit.length} onChange={handFieldChange('length')} />
-              </div>
-              <div className='form-control w-full max-w-xs'>
-                <label className='label'>
-                  <span className='label-text'>Beat</span>
-                </label>
-                <input type='number' className='input input-bordered w-full max-w-xs' value={edit.beat} onChange={handFieldChange('beat')} />
-              </div>
-              <div className='form-control w-full max-w-xs'>
-                <label className='label'>
-                  <span className='label-text'>Key</span>
-                </label>
-                <input type='number' className='input input-bordered w-full max-w-xs' value={edit.key} onChange={handFieldChange('key')} />
-              </div>
-              <div className='form-control w-full max-w-xs'>
-                <label className='label'>
-                  <span className='label-text'>Scale</span>
-                </label>
-                <input type='number' className='input input-bordered w-full max-w-xs' value={edit.scale} onChange={handFieldChange('scale')} />
-              </div>
-              <div className='form-control w-full max-w-xs'>
-                <label className='label'>
-                  <span className='label-text'>Chord Set</span>
-                </label>
-                <input type='number' className='input input-bordered w-full max-w-xs' value={edit.chordset} onChange={handFieldChange('chordset')} />
-              </div>
-              <div className='form-control w-full max-w-xs'>
-                <label className='label'>
-                  <span className='label-text'>Level</span>
-                </label>
-                <input type='number' className='input input-bordered w-full max-w-xs' value={edit.level} onChange={handFieldChange('level')} />
-              </div>
-              <div className='form-control w-full max-w-xs'>
-                <label className='label'>
-                  <span className='label-text'>Gate Arp</span>
-                </label>
-                <input type='number' className='input input-bordered w-full max-w-xs' value={edit.gatearp} onChange={handFieldChange('gatearp')} />
-              </div>
-              <div className='form-control w-full max-w-xs'>
-                <label className='label'>
-                  <span className='label-text'>MFX Type</span>
-                </label>
-                <input type='number' className='input input-bordered w-full max-w-xs' value={edit.mfxtype} onChange={handFieldChange('mfxtype')} />
-              </div>
-              <div className='form-control w-full max-w-xs'>
-                <label className='label'>
-                  <span className='label-text'>Alt 13/14</span>
-                </label>
-                <input type='number' className='input input-bordered w-full max-w-xs' value={edit.alt_13_14} onChange={handFieldChange('alt_13_14')} />
-              </div>
-              <div className='form-control w-full max-w-xs'>
-                <label className='label'>
-                  <span className='label-text'>Alt 15/16</span>
-                </label>
-                <input type='number' className='input input-bordered w-full max-w-xs' value={edit.alt_15_16} onChange={handFieldChange('alt_15_16')} />
+            <div className='overflow-auto h-96'>
+              <div className='py-4'>
+                <div className='form-control w-full max-w-xs'>
+                  <label className='label'>
+                    <span className='label-text'>Pattern Name</span>
+                  </label>
+                  <input type='text' className='input input-bordered w-full max-w-xs' value={edit.name} onChange={handFieldChange('name')} />
+                </div>
+                <div className='form-control w-full max-w-xs'>
+                  <label className='label'>
+                    <span className='label-text'>BPM</span>
+                  </label>
+                  <input type='number' className='input input-bordered w-full max-w-xs' value={edit.bpm} onChange={handFieldChange('bpm')} />
+                </div>
+                <div className='form-control w-full max-w-xs'>
+                  <label className='label'>
+                    <span className='label-text'>Swing</span>
+                  </label>
+                  <input type='number' className='input input-bordered w-full max-w-xs' value={edit.swing} onChange={handFieldChange('swing')} />
+                </div>
+                <div className='form-control w-full max-w-xs'>
+                  <label className='label'>
+                    <span className='label-text'>Length</span>
+                  </label>
+                  <input type='number' className='input input-bordered w-full max-w-xs' value={edit.length} onChange={handFieldChange('length')} />
+                </div>
+                <div className='form-control w-full max-w-xs'>
+                  <label className='label'>
+                    <span className='label-text'>Beat</span>
+                  </label>
+                  <input type='number' className='input input-bordered w-full max-w-xs' value={edit.beat} onChange={handFieldChange('beat')} />
+                </div>
+                <div className='form-control w-full max-w-xs'>
+                  <label className='label'>
+                    <span className='label-text'>Key</span>
+                  </label>
+                  <input type='number' className='input input-bordered w-full max-w-xs' value={edit.key} onChange={handFieldChange('key')} />
+                </div>
+                <div className='form-control w-full max-w-xs'>
+                  <label className='label'>
+                    <span className='label-text'>Scale</span>
+                  </label>
+                  <input type='number' className='input input-bordered w-full max-w-xs' value={edit.scale} onChange={handFieldChange('scale')} />
+                </div>
+                <div className='form-control w-full max-w-xs'>
+                  <label className='label'>
+                    <span className='label-text'>Chord Set</span>
+                  </label>
+                  <input type='number' className='input input-bordered w-full max-w-xs' value={edit.chordset} onChange={handFieldChange('chordset')} />
+                </div>
+                <div className='form-control w-full max-w-xs'>
+                  <label className='label'>
+                    <span className='label-text'>Level</span>
+                  </label>
+                  <input type='number' className='input input-bordered w-full max-w-xs' value={edit.level} onChange={handFieldChange('level')} />
+                </div>
+                <div className='form-control w-full max-w-xs'>
+                  <label className='label'>
+                    <span className='label-text'>Gate Arp</span>
+                  </label>
+                  <input type='number' className='input input-bordered w-full max-w-xs' value={edit.gatearp} onChange={handFieldChange('gatearp')} />
+                </div>
+                <div className='form-control w-full max-w-xs'>
+                  <label className='label'>
+                    <span className='label-text'>MFX Type</span>
+                  </label>
+                  <input type='number' className='input input-bordered w-full max-w-xs' value={edit.mfxtype} onChange={handFieldChange('mfxtype')} />
+                </div>
+                <div className='form-control w-full max-w-xs'>
+                  <label className='label'>
+                    <span className='label-text'>Alt 13/14</span>
+                  </label>
+                  <input type='number' className='input input-bordered w-full max-w-xs' value={edit.alt_13_14} onChange={handFieldChange('alt_13_14')} />
+                </div>
+                <div className='form-control w-full max-w-xs'>
+                  <label className='label'>
+                    <span className='label-text'>Alt 15/16</span>
+                  </label>
+                  <input type='number' className='input input-bordered w-full max-w-xs' value={edit.alt_15_16} onChange={handFieldChange('alt_15_16')} />
+                </div>
               </div>
             </div>
             <div className='modal-action'>
