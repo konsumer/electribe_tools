@@ -4,7 +4,7 @@ For each tool, nothing is sent to or stored on a server (it's  all in your brows
 
 ## Pattern Manager
 
-This is baed on [e2allpat](https://github.com/bangcorrupt/e2allpat).
+This is baed on [electribe2-pattern-editor](https://maxforlive.com/library/device/2816/electribe2-pattern-editor).
 
 - Submit allpat file and receive zip archive of patterns + global settings backup.
 - Submit zip archive of patterns + global settings backup and receive allpat file.

@@ -1,0 +1,20 @@
+name: Publish
+
+on: push
+
+jobs:
+  my-job:
+    name: Publish on surge
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+      - run: npm ci
+      - run: npm run build
+      - name: Deploy to electribe_tools.surge.sh
+        uses: dswistowski/surge-sh-action@v1
+        with:
+          domain: 'electribe_tools.surge.sh'
+          project: 'dist'
+          login: ${{ secrets.surge_login }}
+          token: ${{ secrets.surge_token }}
