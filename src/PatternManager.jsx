@@ -86,7 +86,7 @@ export default function PatternManager () {
         <p className=''>This tool will allow you to convert a zip of patterns + global settings to an e2sallpat file, or vice-versa. You can use it to rename/re-order a bunch of patterns, or use the individual patterns in other tools.</p>
         <p>Select a zip or e2sallpat file, it will auto-detect the format.</p>
         <div className='alert alert-success mb-4'>
-          <span>No files are stored on server, or even uploaded, anywhere.</span>
+          <span>No files are stored on server, or even uploaded.</span>
         </div>
         <input onChange={handleFileSelect} type='file' className='file-input file-input-bordered file-input-primary w-full max-w-xs' />
         {error && (
