@@ -16,15 +16,15 @@ export class E2Pattern {
       throw new Error(`Incorrect Length: ${pattern.byteLength}`)
     }
     this.pattern = pattern
-    this.parts = []
-    for (var i = 0; i < 0x10; i++) {
-      this.parts[i] = new E2Part(this.pattern, partOffset + i * partSize)
-    }
-
-    this.sequences = []
-    for (var i = 0; i < 0x10; i++) {
-      this.sequences[i] = new E2Sequence(this.pattern, partOffset + i * partSize + sequenceOffset)
-    }
+    //     this.parts = []
+    //     for (var i = 0; i < 0x10; i++) {
+    //       this.parts[i] = new E2Part(this.pattern, partOffset + i * partSize)
+    //     }
+    //
+    //     this.sequences = []
+    //     for (var i = 0; i < 0x10; i++) {
+    //       this.sequences[i] = new E2Sequence(this.pattern, partOffset + i * partSize + sequenceOffset)
+    //     }
   }
 
   get name () {

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import { IconTrash, IconPencil, IconDownload } from '@tabler/icons-react'
+import { download } from './utils.js'
 
 // a little function to help us with reordering the result
 const reorder = (list, startIndex, endIndex) => {
@@ -64,7 +65,9 @@ export default function PatternList ({ items, setItems, ...props }) {
     window.modal_edit.close()
   }
 
-  const handleDownload = n => e => {}
+  const handleDownload = n => e => {
+    download(items[n].name + '.e2spat', items[n].pattern)
+  }
 
   const handFieldChange = n => e => setEdit({ ...edit, [n]: e.target.value })
 
