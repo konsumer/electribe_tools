@@ -197,7 +197,7 @@ export default function PatternList ({ items, setItems, ...props }) {
                           <a className='tooltip cursor-pointer' data-tip={`Download ${item.name}`} onClick={handleDownload(index)}>
                             <IconDownload />
                           </a>
-                          <a className='tooltip cursor-pointer' data-tip={`Edit pattern for ${item.name}`} onClick={handleEditPatternShow(index)}>
+                          <a className='tooltip cursor-pointer' data-tip={`Edit patterns for ${item.name}`} onClick={handleEditPatternShow(index)}>
                             <IconPiano />
                           </a>
                           <a className='tooltip cursor-pointer' data-tip={`Edit params for ${item.name}`} onClick={handleEditShow(index)}>

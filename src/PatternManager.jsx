@@ -3,7 +3,7 @@ import { Uint8ArrayReader, Uint8ArrayWriter, BlobWriter, ZipReader, ZipWriter, B
 import { IconCircleXFilled, IconDownload } from '@tabler/icons-react'
 
 import { E2Pattern } from './e2.js'
-import { download, readAsArrayBuffer } from './utils.js'
+import { download, readAsArrayBuffer, getID } from './utils.js'
 import PatternList from './PatternList.jsx'
 
 const decoder = new TextDecoder()
@@ -26,14 +26,14 @@ function e2load (file, bytes) {
       data.set(new Uint8Array(header), 0)
       data.set(c, header.byteLength)
       const sample = new E2Pattern(data)
-      sample.id = Math.random().toString(36).slice(2, 7)
+      sample.id = getID()
       out.push(sample)
     }
   } catch (e) {
     // TODO: this is not a very good check, but if full e2sallpat fails, load as e2spat
     // also the bytes are not correct here, so leaving until later
     // const sample = new E2Pattern(bytes)
-    // sample.id = Math.random().toString(36).slice(2, 7)
+    // sample.id = getID()
     // out.push(sample)
   }
 
@@ -47,7 +47,7 @@ async function zipload (file, bytes) {
   const out = await Promise.all(entries.map(async (entry) => {
     const data = await entry.getData(new Uint8ArrayWriter())
     const sample = new E2Pattern(data)
-    sample.id = Math.random().toString(36).slice(2, 7)
+    sample.id = getID()
     return sample
   }))
   await zipReader.close()

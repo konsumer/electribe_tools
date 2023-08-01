@@ -21,3 +21,6 @@ export function download (filename, bytes) {
   }, false)
   a.click()
 }
+
+// get a random number to ID a single thing, in a list
+export const getID = () => Math.random().toString(36).slice(2, 7)
