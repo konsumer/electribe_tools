@@ -41,6 +41,8 @@ function e2load (file, bytes) {
 }
 
 async function zipload (file, bytes) {
+  // TODO: pull out global header
+
   const zipFileReader = new Uint8ArrayReader(new Uint8Array(bytes))
   const zipReader = new ZipReader(zipFileReader)
   const entries = await zipReader.getEntries()
