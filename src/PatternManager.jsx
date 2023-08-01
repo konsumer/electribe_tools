@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Uint8ArrayReader, BlobWriter, ZipReader, ZipWriter, BlobReader } from '@zip.js/zip.js'
+import { Uint8ArrayReader, Uint8ArrayWriter, BlobWriter, ZipReader, ZipWriter, BlobReader } from '@zip.js/zip.js'
 import { IconCircleXFilled, IconDownload } from '@tabler/icons-react'
 
 import { E2Pattern } from './e2.js'
@@ -8,7 +8,7 @@ import PatternList from './PatternList.jsx'
 
 const decoder = new TextDecoder()
 
-function e2zip (file, bytes) {
+function e2load (file, bytes) {
   const header = bytes.slice(0, 0x100) // Korg file header
   const settings = bytes.slice(0x100, 0x10100) //  global settings + padding
   const pat_count = 250
@@ -32,10 +32,12 @@ function e2zip (file, bytes) {
   return out
 }
 
-async function zip2e (file, bytes) {
+async function zipload (file, bytes) {
   const zipFileReader = new Uint8ArrayReader(new Uint8Array(bytes))
   const zipReader = new ZipReader(zipFileReader)
-  const out = await Promise.all((await zipReader.getEntries()).map(async (entry, i) => {
+  const entries = await zipReader.getEntries()
+  const out = await Promise.all(entries.map(async (entry) => {
+    const data = await entry.getData(new Uint8ArrayWriter())
     const sample = new E2Pattern(data)
     sample.id = Math.random().toString(36).slice(2, 7)
     return sample
@@ -51,9 +53,9 @@ async function processFile (file) {
   }
   const bytes = await readAsArrayBuffer(file)
   if (decoder.decode(bytes.slice(0x0, 0x19)) === 'KORG\0\0\0\0\0\0\0\0\0\0\0\0e2sampler') {
-    return e2zip(file, bytes)
+    return e2load(file, bytes)
   } else if (decoder.decode(bytes.slice(0x0, 0x4)) === 'PK\x03\x04') {
-    return zip2e(file, bytes)
+    return zipload(file, bytes)
   } else {
     throw new Error('Not a valid zip or e2sallpat file.')
   }
