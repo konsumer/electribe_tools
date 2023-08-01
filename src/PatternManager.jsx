@@ -12,21 +12,29 @@ function e2load (file, bytes) {
   const header = bytes.slice(0, 0x100) // Korg file header
   const settings = bytes.slice(0x100, 0x10100) //  global settings + padding
   const pat_count = 250
-
   const pat_off = 0x10100
   const pat_len = 0x4000
+
   const out = []
 
-  for (let i = 0; i < pat_count; i++) {
-    const start = pat_off + (i * pat_len)
-    const end = start + pat_len
-    const c = bytes.slice(start, end)
-    const data = new Uint8Array(header.byteLength + c.byteLength)
-    data.set(new Uint8Array(header), 0)
-    data.set(new Uint8Array(c), header.byteLength)
-    const sample = new E2Pattern(data)
-    sample.id = Math.random().toString(36).slice(2, 7)
-    out.push(sample)
+  try {
+    for (let i = 0; i < pat_count; i++) {
+      const start = pat_off + (i * pat_len)
+      const end = start + pat_len
+      const c = new Uint8Array(bytes.slice(start, end))
+      const data = new Uint8Array(header.byteLength + c.byteLength)
+      data.set(new Uint8Array(header), 0)
+      data.set(c, header.byteLength)
+      const sample = new E2Pattern(data)
+      sample.id = Math.random().toString(36).slice(2, 7)
+      out.push(sample)
+    }
+  } catch (e) {
+    // TODO: this is not a very good check, but if full e2sallpat fails, load as e2spat
+    // also the bytes are not correct here, so leaving until later
+    // const sample = new E2Pattern(bytes)
+    // sample.id = Math.random().toString(36).slice(2, 7)
+    // out.push(sample)
   }
 
   return out
@@ -52,7 +60,9 @@ async function processFile (file) {
     return
   }
   // TODO: handle e2sallpat vs e2spat
+
   const bytes = await readAsArrayBuffer(file)
+
   if (decoder.decode(bytes.slice(0x0, 0x19)) === 'KORG\0\0\0\0\0\0\0\0\0\0\0\0e2sampler') {
     return e2load(file, bytes)
   } else if (decoder.decode(bytes.slice(0x0, 0x4)) === 'PK\x03\x04') {
