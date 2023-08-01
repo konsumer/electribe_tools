@@ -1,3 +1,5 @@
+import { useEffect, useRef } from 'react'
+
 // read a browser file-opbject, return a promise
 export const readAsArrayBuffer = (file) => new Promise((resolve, reject) => {
   const reader = new FileReader()
@@ -24,3 +26,16 @@ export function download (filename, bytes) {
 
 // get a random number to ID a single thing, in a list
 export const getID = () => Math.random().toString(36).slice(2, 7)
+
+// handle daisy dialogs, returns a ref to use
+export function useDialog (show) {
+  const ref = useRef()
+  useEffect(() => {
+    if (show) {
+      ref.current.showModal()
+    } else {
+      ref.current.closeModal()
+    }
+  }, [show])
+  return ref
+}

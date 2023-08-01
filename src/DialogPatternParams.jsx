@@ -1,15 +1,7 @@
-import { useEffect, useRef } from 'react'
+import { useDialog } from './utils.js'
 
 export default function DialogPatternParams ({ value, onSubmit, onChange }) {
-  const ref = useRef()
-
-  useEffect(() => {
-    if (value) {
-      ref.current.showModal()
-    } else {
-      ref.current.closeModal()
-    }
-  }, [value])
+  const ref = useDialog(!!value)
 
   const handFieldChange = n => e => onChange({ ...value, [n]: e.target.value })
 
