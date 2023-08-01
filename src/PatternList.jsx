@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
-import { IconTrash, IconPencil, IconDownload } from '@tabler/icons-react'
+import { IconTrash, IconPencil, IconDownload, IconPiano } from '@tabler/icons-react'
 import { download } from './utils.js'
 
 // a little function to help us with reordering the result
@@ -13,6 +13,7 @@ const reorder = (list, startIndex, endIndex) => {
 
 export default function PatternList ({ items, setItems, ...props }) {
   const [edit, setEdit] = useState()
+  const [editPattern, setEditPattern] = useState()
   const onDragEnd = result => {
     // dropped outside the list
     if (!result.destination) {
@@ -50,6 +51,10 @@ export default function PatternList ({ items, setItems, ...props }) {
       alt_15_16: items[index].alt_15_16
     })
     window.modal_edit.showModal()
+  }
+
+  const handleEditPatternShow = index => () => {
+
   }
 
   const handleEditSave = e => {
@@ -186,13 +191,16 @@ export default function PatternList ({ items, setItems, ...props }) {
                       <div className='menu menu-horizontal bg-base-200 rounded-box mt-2 w-full items-center justify-between'>
                         <div>{item.name}</div>
                         <div>
-                          <a className='tooltip cursor-pointer' data-tip={`Delete ${item.name}`} onClick={handleDelete(index)}>
+                          <a className='tooltip cursor-pointer' data-tip={`Delete ${item.name} from this set`} onClick={handleDelete(index)}>
                             <IconTrash />
                           </a>
                           <a className='tooltip cursor-pointer' data-tip={`Download ${item.name}`} onClick={handleDownload(index)}>
                             <IconDownload />
                           </a>
-                          <a className='tooltip cursor-pointer' data-tip={`Edit ${item.name}`} onClick={handleEditShow(index)}>
+                          <a className='tooltip cursor-pointer' data-tip={`Edit pattern for ${item.name}`} onClick={handleEditPatternShow(index)}>
+                            <IconPiano />
+                          </a>
+                          <a className='tooltip cursor-pointer' data-tip={`Edit params for ${item.name}`} onClick={handleEditShow(index)}>
                             <IconPencil />
                           </a>
                         </div>

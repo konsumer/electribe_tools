@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Uint8ArrayReader, BlobWriter, ZipReader, ZipWriter } from '@zip.js/zip.js'
+import { Uint8ArrayReader, BlobWriter, ZipReader, ZipWriter, BlobReader } from '@zip.js/zip.js'
 import { IconCircleXFilled, IconDownload } from '@tabler/icons-react'
 
 import { E2Pattern } from './e2.js'
@@ -79,12 +79,19 @@ export default function PatternManager () {
       .catch(e => setError(e.message))
   }
 
-  const handleDownloadE2 = () => {
-
+  const handleDownloadE2 = async () => {
+    console.log('TODO', samples)
   }
 
-  const handleDownloadZip = () => {
-
+  const handleDownloadZip = async () => {
+    const zipWriter = new ZipWriter(new BlobWriter('application/zip'), { bufferedWrite: true, useCompressionStream: false })
+    for (const s in samples) {
+      const sample = samples[s]
+      const filename = `${s.toString().padStart(3, '0')}_${sample.name}.e2spat`
+      const blob = new Blob([new Uint8Array(sample.pattern.buffer)])
+      await zipWriter.add(filename, new BlobReader(blob))
+    }
+    download('e2patterns.zip', await zipWriter.close())
   }
 
   return (
