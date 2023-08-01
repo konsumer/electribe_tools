@@ -17,4 +17,8 @@ This is baed on code from [electribe2-pattern-editor](https://maxforlive.com/lib
 ### TODO
 
 - pattern-editing
+- global settings. still haven't worked this out.
+- Instrument-mapping, like change all the references to instrument 1 to instrument 50.
+- Allow saving an instrument-map, so if you install hacktribe, you can setup your map once, and have it work for stock patterns, with all the stock samplers starting at some other number.
 - send to device via sysex (using [Web MIDI API](https://developer.mozilla.org/en-US/docs/Web/API/Web_MIDI_API))
+- play on device via sysex (using [Web MIDI API](https://developer.mozilla.org/en-US/docs/Web/API/Web_MIDI_API)
