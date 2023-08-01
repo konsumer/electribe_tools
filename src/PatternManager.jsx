@@ -51,6 +51,7 @@ async function processFile (file) {
   if (!file) {
     return
   }
+  // TODO: handle e2sallpat vs e2spat
   const bytes = await readAsArrayBuffer(file)
   if (decoder.decode(bytes.slice(0x0, 0x19)) === 'KORG\0\0\0\0\0\0\0\0\0\0\0\0e2sampler') {
     return e2load(file, bytes)
